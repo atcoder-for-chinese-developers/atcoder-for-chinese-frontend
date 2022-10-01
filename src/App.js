@@ -13,7 +13,7 @@ function App() {
   const contextRef = useRef();
 
   async function loadData() {
-    let contestsRes = await fetch("/data.json");
+    let contestsRes = await fetch("./data.json");
     let contests = await contestsRes.json();
     return {
       contests: contests,
