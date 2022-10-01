@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './Home.css';
 
 function Home(props) {
