@@ -3,10 +3,14 @@ import './App.css';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './Home';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import Nav from './Nav';
+import { Sticky } from 'semantic-ui-react';
 
 function App() {
   const [data, setData] = useState({ ready: 0 });
+
+  const contextRef = useRef();
 
   async function loadData() {
     let contestsRes = await fetch("/data.json");
@@ -26,8 +30,9 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" ref={contextRef}>
       <HashRouter>
+        <Sticky context={contextRef}><Nav /></Sticky>
         <Routes>
           <Route exact path="/" element={<Home data={data}/>} />
           <Route exact path="/:tab" element={<Home data={data}/>} />

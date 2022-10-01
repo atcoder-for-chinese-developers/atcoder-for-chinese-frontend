@@ -10,7 +10,7 @@ function ContestList(props) {
     let problemElements = [];
     problems.forEach(problem => {
       problemElements.push(
-        <Table.Cell key = { problem.id }>
+        <Table.Cell key = { problem.id } className='ProblemCell'>
           { problem.title }
         </Table.Cell>
       )
