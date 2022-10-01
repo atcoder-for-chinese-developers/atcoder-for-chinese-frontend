@@ -30,6 +30,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route exact path="/" element={<Home data={data}/>} />
+          <Route exact path="/:tab" element={<Home data={data}/>} />
         </Routes>
       </HashRouter>
     </div>
