@@ -1,3 +1,41 @@
 .ProblemCell {
     font-weight: unset !important;
 }
+
+.DifficultyBlack {
+    color: rgb(0, 0, 0);
+}
+.DifficultyGrey {
+    color: rgb(128, 128, 128);
+}
+.DifficultyBrown {
+    color: rgb(128, 64, 0);
+}
+.DifficultyGreen {
+    color: rgb(0, 128, 0);
+}
+.DifficultyCyan {
+    color: rgb(0, 192, 192);
+}
+.DifficultyBlue {
+    color: rgb(0, 0, 255);
+}
+.DifficultyYellow {
+    color: rgb(192, 192, 0);
+}
+.DifficultyOrange {
+    color: rgb(255, 128, 0);
+}
+.DifficultyRed {
+    color: rgb(255, 0, 0);
+}
+
+.DifficultyDisplayer {
+    display: inline-block;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 1px;
+	margin-right: 5px;
+	height: 12px;
+	width: 12px;
+}
