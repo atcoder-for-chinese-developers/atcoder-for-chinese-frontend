@@ -1,6 +1,7 @@
 import './ContestList.css';
 
 import { Table } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 function ContestList(props) {
   function getDifficultyClass(difficulty) {
@@ -51,9 +52,11 @@ function ContestList(props) {
     let problemElements = [];
     problems.forEach(problem => {
       problemElements.push(
-        <Table.Cell key={ problem.id } className={ 'ProblemCell Difficulty' + getDifficultyClass(problem.difficulty) } title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }>
+        <Table.Cell key={ problem.id } className='ProblemCell'
+          title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }
+        >
           <span className='DifficultyDisplayer' style={ getDifficultyDisplayerStyle(problem.difficulty) }></span>
-          { problem.title }
+          <Link to={ '/problem/' + problem.id } className={ 'Difficulty' + getDifficultyClass(problem.difficulty) }>{ problem.title }</Link>
         </Table.Cell>
       )
     })

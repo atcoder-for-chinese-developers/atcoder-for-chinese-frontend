@@ -5,7 +5,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import { useRef, useState } from 'react';
 import Nav from './Nav';
-import { Sticky } from 'semantic-ui-react';
+import { Loader, Sticky } from 'semantic-ui-react';
 
 function App() {
   const [data, setData] = useState({ ready: 0 });
@@ -29,14 +29,24 @@ function App() {
       .catch(e => console.log(e));
   }
 
+  let content;
+
+  if (data.ready) {
+    content = (
+      <Routes>
+        <Route exact path="/" element={<Home data={data}/>} />
+        <Route exact path="/:tab" element={<Home data={data}/>} />
+      </Routes>
+    );
+  } else {
+    content = <Loader active inline='centered' size='big' className='Loader'>正在加载</Loader>;
+  }
+
   return (
     <div className="App" ref={contextRef}>
       <HashRouter>
         <Sticky context={contextRef}><Nav /></Sticky>
-        <Routes>
-          <Route exact path="/" element={<Home data={data}/>} />
-          <Route exact path="/:tab" element={<Home data={data}/>} />
-        </Routes>
+        { content }
       </HashRouter>
     </div>
   );
