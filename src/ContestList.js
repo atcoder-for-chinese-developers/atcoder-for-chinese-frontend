@@ -47,25 +47,27 @@ function ContestList(props) {
 
   const contestList = props.data;
   let elementList = [];
-  contestList.forEach(contest => {
+  for (const contestID in contestList) {
+    const contest = contestList[contestID];
     let problems = contest.problems;
     let problemElements = [];
-    problems.forEach(problem => {
+    for (const problemID in problems) {
+      const problem = problems[problemID];
       problemElements.push(
         <Table.Cell key={ problem.id } className='ProblemCell'
           title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }
         >
           <span className='DifficultyDisplayer' style={ getDifficultyDisplayerStyle(problem.difficulty) }></span>
-          <Link to={ '/problem/' + problem.id } className={ 'Difficulty' + getDifficultyClass(problem.difficulty) }>{ problem.title }</Link>
+          <Link to={ '/contest/' + contestID + '/' + problemID } className={ 'Difficulty' + getDifficultyClass(problem.difficulty) }>{ problem.title }</Link>
         </Table.Cell>
       )
-    })
+    }
     elementList.push(
-      <Table celled fixed singleLine key={ contest.id }>
+      <Table celled fixed singleLine key={ contestID }>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan={ problems.length > 0 ? problems.length : 1 }>
-              <a rel="noreferrer" href={ 'https://atcoder.jp/contests/' + contest.id } target="_blank">{ contest.title }</a>
+            <Table.HeaderCell colSpan={ problemElements.length > 0 ? problemElements.length : 1 }>
+              <a rel="noreferrer" href={ 'https://atcoder.jp/contests/' + contestID } target="_blank">{ contest.title }</a>
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -76,7 +78,7 @@ function ContestList(props) {
         </Table.Body>
       </Table>
     )
-  });
+  }
   elementList = elementList.reverse();
   return (
     <div className="ContestList">

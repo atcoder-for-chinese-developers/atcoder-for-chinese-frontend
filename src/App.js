@@ -1,11 +1,12 @@
 import './App.css';
 
+import { useRef, useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
+import { Loader, Sticky } from 'semantic-ui-react';
 
 import Home from './Home';
-import { useRef, useState } from 'react';
 import Nav from './Nav';
-import { Loader, Sticky } from 'semantic-ui-react';
+import ProblemPage from './ProblemPage';
 
 function App() {
   const [data, setData] = useState({ ready: 0 });
@@ -13,10 +14,16 @@ function App() {
   const contextRef = useRef();
 
   async function loadData() {
-    let contestsRes = await fetch("./data.json");
+    let contestsRes = await fetch("/spiders/data.json");
+    let translationsRes = await fetch("/translations/list.json");
+    let solutionsRes = await fetch("/solutions/list.json");
     let contests = await contestsRes.json();
+    let translations = await translationsRes.json();
+    let solutions = await solutionsRes.json();
     return {
       contests: contests,
+      translations: translations,
+      solutions: solutions,
       ready: 1
     }
   }
@@ -35,6 +42,7 @@ function App() {
     content = (
       <Routes>
         <Route exact path="/" element={<Home data={data}/>} />
+        <Route exact path="/contest/:contest/:problem" element={<ProblemPage data={data}/>}/>
         <Route exact path="/:tab" element={<Home data={data}/>} />
       </Routes>
     );
