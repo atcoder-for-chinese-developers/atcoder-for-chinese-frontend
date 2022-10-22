@@ -55,7 +55,7 @@ function ProblemDisplayer(props) {
         <Link to={ link } className={ 'Difficulty' + getDifficultyClass(problem.difficulty) }>{ text }</Link>
       );
     } else return (
-        <div className={ 'Difficulty' + getDifficultyClass(problem.difficulty) }>{ text }</div>
+        <span className={ 'Difficulty' + getDifficultyClass(problem.difficulty) }>{ text }</span>
     );
   }
 
