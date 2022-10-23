@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# AtCoder for Chinese 第二版
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 关于
 
-## Available Scripts
+这个版本是 AtCoder for Chinese 的第二版本（目前处于两个版本同时开发的状态）。
 
-In the project directory, you can run:
+该版本使用 React 框架，由 [Create React App](https://github.com/facebook/create-react-app) 创建。
 
-### `npm start`
+## 开发指南
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 环境需求
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. 一台联网的设备
+2. Node.js v16.x
 
-### `npm test`
+### 开始开发
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+将仓库下载到本地，执行 `npm install` 安装依赖。
 
-### `npm run build`
+执行 `npm start` 以在开发模式下运行代码。等待编译完成后就可以在 [http://localhost:3000](http://localhost:3000) 中预览最终效果。如果发生改动，页面会自动刷新以展示最新的页面。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+执行 `npm build` 以生成最终的 HTML 等文件（这些文件会保存在 `build` 目录下）。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+上传到 GitHub 后，会自动生成并发布到 GitHub Pages。等待 GitHub Actions 执行完毕后（仓库页面文件列表上方出现一个绿勾）就可以在 GitHub Pages 中浏览网站。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 学习资料
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[React 文档](https://reactjs.org/).
