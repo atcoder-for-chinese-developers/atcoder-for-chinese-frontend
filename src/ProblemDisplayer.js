@@ -29,8 +29,10 @@ function ProblemDisplayer(props) {
   }
   function getDifficultyRate(difficulty) {
     if (difficulty === null) return '100%';
-    if (difficulty >= 3200) return '100%';
-    return ((difficulty % 400) / 4) + '%';
+    let displayDifficulty = difficulty;
+    if (displayDifficulty < 400) displayDifficulty = Math.round(400 / Math.exp(1 - displayDifficulty / 400));
+    if (displayDifficulty >= 3200) return '100%';
+    return ((displayDifficulty % 400) / 4) + '%';
   }
   function getDifficultyDisplayerStyle(difficulty) {
     let ret = {};
@@ -64,7 +66,7 @@ function ProblemDisplayer(props) {
       title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }
     >
       
-      <span className='DifficultyDisplayer' style={ getDifficultyDisplayerStyle(problem.difficulty) }></span>
+      <span className={ props.large ? 'LargeDifficultyDisplayer' : 'DifficultyDisplayer' } style={ getDifficultyDisplayerStyle(problem.difficulty) }></span>
       { getTextElement(problem.title) }
     </span>
   );

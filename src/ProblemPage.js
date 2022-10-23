@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Header } from 'semantic-ui-react';
 import ProblemDisplayer from './ProblemDisplayer';
@@ -6,20 +7,31 @@ import './ProblemPage.css';
 function ProblemPage(props) {
   const params = useParams();
   
-  const contest = params.contest;
-  const problem = params.problem;
-  
-  let data = {};
-  for (const key in props.data.contests) Object.assign(data, props.data.contests[key]);
+  function getData() {
+    let contest = params.contest;
+    let problem = params.problem;
+    for (let key in props.data.contests) {
+      if (props.data.contests[key].hasOwnProperty(contest)) {
+        return props.data.contests[key][contest].problems[problem];
+      }
+      return {};
+    }
+  }
+
+  let data = getData();
+
+  useEffect(() => {
+    document.title = `${ data.title } - AtCoder for Chinese`;
+  });
 
   return (
-    <>
+    <div className='ProblemPage'>
       <Container>
         <Header as="h1">
-          <ProblemDisplayer problem={ data[contest].problems[problem] }/>
+          <ProblemDisplayer large problem={ data }/>
         </Header>
       </Container>
-    </>
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Loader, Sticky } from 'semantic-ui-react';
 
@@ -27,6 +27,10 @@ function App() {
       ready: 1
     }
   }
+
+  useEffect(() => {
+    if (!data.ready) document.title = `正在加载 - AtCoder for Chinese`;
+  })
 
   if (!data.ready) {
     loadData()
