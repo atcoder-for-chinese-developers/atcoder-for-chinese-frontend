@@ -14,8 +14,8 @@ function ProblemPage(props) {
       if (props.data.contests[key].hasOwnProperty(contest)) {
         return props.data.contests[key][contest].problems[problem];
       }
-      return {};
     }
+    return {};
   }
 
   let data = getData();
