@@ -4,7 +4,7 @@ import './Nav.css';
 
 import logo from './logo.png';
 
-function Nav(props) {
+function Nav() {
   return (
     <div className="Nav">
       <Menu size='large'>

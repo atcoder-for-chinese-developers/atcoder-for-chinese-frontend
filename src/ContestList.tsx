@@ -2,8 +2,13 @@ import './ContestList.css';
 
 import { Table } from 'semantic-ui-react';
 import ProblemDisplayer from './ProblemDisplayer';
+import { ContestSet } from './types';
 
-function ContestList(props) {
+interface ContestListProps {
+  data: ContestSet;
+};
+
+function ContestList(props: ContestListProps) {
   const contestList = props.data;
   let elementList = [];
   for (const contestID in contestList) {

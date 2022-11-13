@@ -5,11 +5,16 @@ import ContestList from './ContestList';
 
 import { Container } from 'semantic-ui-react';
 import { useEffect } from 'react';
+import { GlobalData } from './types';
 
-function Home(props) {
+interface HomeProps {
+  data: GlobalData;
+}
+
+function Home(props: HomeProps) {
   const params = useParams();
 
-  const tab = params.hasOwnProperty('tab') ? params.tab : 'abc';
+  const tab = params.hasOwnProperty('tab') ? (params.tab as string) : 'abc';
 
   useEffect(() => {
     let tab = params.hasOwnProperty('tab') ? params.tab : 'abc';

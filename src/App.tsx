@@ -7,11 +7,31 @@ import { Loader, Sticky } from 'semantic-ui-react';
 import Home from './Home';
 import Nav from './Nav';
 import ProblemPage from './ProblemPage';
+import { GlobalData } from './types';
 
 function App() {
-  const [data, setData] = useState({ ready: 0 });
+  const [data, setData] = useState<GlobalData>({
+    contests: {},
+    translations: {
+      lastCommit: {
+        id: '',
+        short: '',
+        date: ''
+      },
+      data: {}
+    },
+    solutions: {
+      lastCommit: {
+        id: '',
+        short: '',
+        date: ''
+      },
+      data: {}
+    },
+    ready: false
+  });
 
-  const contextRef = useRef();
+  const contextRef = useRef<HTMLDivElement | null>(null);
 
   async function loadData() {
     let contestsRes = await fetch("/spiders/data.json");
@@ -24,7 +44,7 @@ function App() {
       contests: contests,
       translations: translations,
       solutions: solutions,
-      ready: 1
+      ready: true
     }
   }
 
@@ -45,9 +65,9 @@ function App() {
   if (data.ready) {
     content = (
       <Routes>
-        <Route exact path="/" element={<Home data={data}/>} />
-        <Route exact path="/problem/:contest/:problem" element={<ProblemPage data={data}/>}/>
-        <Route exact path="/:tab" element={<Home data={data}/>} />
+        <Route path="/" element={<Home data={data}/>} />
+        <Route path="/problem/:contest/:problem" element={<ProblemPage data={data}/>}/>
+        <Route path="/:tab" element={<Home data={data}/>} />
       </Routes>
     );
   } else {

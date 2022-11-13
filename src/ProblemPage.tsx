@@ -5,31 +5,49 @@ import ProblemDisplayer from './ProblemDisplayer';
 import './ProblemPage.css';
 
 import dayjs from 'dayjs';
+import { ArticleSet, GlobalData, Problem } from './types';
 
-function ProblemPage(props) {
+interface ProblemPageProps {
+  data: GlobalData;
+};
+
+function ProblemPage(props: ProblemPageProps) {
   const params = useParams();
   
-  function getProblemData() {
-    let contest = params.contest;
-    let problem = params.problem;
+  function getProblemData() : Problem | null {
+    let contest = params.contest as string;
+    let problem = params.problem as string;
     for (let key in props.data.contests) {
       if (props.data.contests[key].hasOwnProperty(contest)) {
         return props.data.contests[key][contest].problems[problem];
       }
     }
-    return {};
+    return null;
   }
 
   let problem = getProblemData();
-  let translations = (props.data.translations.data[params.contest] || {})[params.problem] || {};
-  let solutions = (props.data.solutions.data[params.contest] || {})[params.problem] || {};
 
-  function formatDate(date) {
+  useEffect(() => {
+    if (problem) document.title = `${ (problem as Problem).title } - AtCoder for Chinese`;
+  });
+
+  if (!problem) return (
+    <div className="problemPage">
+      <Container>
+        <Header as="h1">未找到对应题目</Header>
+      </Container>
+    </div>
+  )
+
+  let translations = (props.data.translations.data[params.contest as string] || {})[params.problem as string] || {};
+  let solutions = (props.data.solutions.data[params.contest as string] || {})[params.problem as string] || {};
+
+  function formatDate(date: string | undefined) {
     if ((date || '') === '') return '';
-    return dayjs(new Date(date)).format('YYYY 年 MM 月 DD 日 hh:mm');
+    return dayjs(new Date(date as string)).format('YYYY 年 MM 月 DD 日 hh:mm');
   }
 
-  function getArticleTable(articles, type) {
+  function getArticleTable(articles: ArticleSet, type: string) {
     if (Object.keys(articles).length === 0) {
       return (
         <Segment placeholder attached>
@@ -70,9 +88,6 @@ function ProblemPage(props) {
     );
   }
 
-  useEffect(() => {
-    document.title = `${ problem.title } - AtCoder for Chinese`;
-  });
 
   return (
     <div className='ProblemPage'>
