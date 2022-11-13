@@ -14,7 +14,7 @@ function ContestList(props) {
       const problem = problems[problemID];
       problemElements.push(
         <Table.Cell key={ problem.id } className='ProblemCell'>
-          <ProblemDisplayer problem={ problem } link={ '/contest/' + contestID + '/' + problemID }/>
+          <ProblemDisplayer problem={ problem } link={ '/problem/' + contestID + '/' + problemID }/>
         </Table.Cell>
       )
     }

@@ -46,7 +46,7 @@ function App() {
     content = (
       <Routes>
         <Route exact path="/" element={<Home data={data}/>} />
-        <Route exact path="/contest/:contest/:problem" element={<ProblemPage data={data}/>}/>
+        <Route exact path="/problem/:contest/:problem" element={<ProblemPage data={data}/>}/>
         <Route exact path="/:tab" element={<Home data={data}/>} />
       </Routes>
     );
