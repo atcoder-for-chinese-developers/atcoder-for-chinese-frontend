@@ -5,7 +5,7 @@ import ProblemDisplayer from './ProblemDisplayer';
 import './ProblemPage.css';
 
 import dayjs from 'dayjs';
-import { ArticleSet, GlobalData, Problem } from './types';
+import { getProblemData } from './util';
 
 interface ProblemPageProps {
   data: GlobalData;
@@ -13,19 +13,8 @@ interface ProblemPageProps {
 
 function ProblemPage(props: ProblemPageProps) {
   const params = useParams();
-  
-  function getProblemData() : Problem | null {
-    let contest = params.contest as string;
-    let problem = params.problem as string;
-    for (let key in props.data.contests) {
-      if (props.data.contests[key].hasOwnProperty(contest)) {
-        return props.data.contests[key][contest].problems[problem];
-      }
-    }
-    return null;
-  }
 
-  let problem = getProblemData();
+  let problem = getProblemData(params, props.data);
 
   useEffect(() => {
     if (problem) document.title = `${ (problem as Problem).title } - AtCoder for Chinese`;

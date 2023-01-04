@@ -7,7 +7,7 @@ import { Loader, Sticky } from 'semantic-ui-react';
 import Home from './Home';
 import Nav from './Nav';
 import ProblemPage from './ProblemPage';
-import { GlobalData } from './types';
+import ArticlePage from './ArticlePage';
 
 function App() {
   const [data, setData] = useState<GlobalData>({
@@ -67,6 +67,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home data={data}/>} />
         <Route path="/problem/:contest/:problem" element={<ProblemPage data={data}/>}/>
+        <Route path="/translation/:contest/:problem/:id" element={<ArticlePage data={data} type='translations'/>}/>
+        <Route path="/solution/:contest/:problem/:id" element={<ArticlePage data={data} type='solutions'/>}/>
         <Route path="/:tab" element={<Home data={data}/>} />
       </Routes>
     );

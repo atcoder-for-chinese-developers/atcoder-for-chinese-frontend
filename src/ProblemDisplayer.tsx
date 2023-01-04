@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import './ProblemDisplayer.css';
-import { Problem } from './types';
 
 interface ProblemDisplayerProps {
   external?: boolean;

@@ -5,7 +5,6 @@ import ContestList from './ContestList';
 
 import { Container } from 'semantic-ui-react';
 import { useEffect } from 'react';
-import { GlobalData } from './types';
 
 interface HomeProps {
   data: GlobalData;

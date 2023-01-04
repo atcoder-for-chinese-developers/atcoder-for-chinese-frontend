@@ -1,4 +1,4 @@
-export type Problem = {
+type Problem = {
     id: string,
     contest_id: string,
     problem_index: string,
@@ -7,11 +7,11 @@ export type Problem = {
     difficulty: number | null
 };
 
-export type ProblemSet = {
+type ProblemSet = {
     [index: string]: Problem
 };
 
-export type Contest = {
+type Contest = {
     id: string,
     start_epoch_second: number,
     duration_second: number,
@@ -20,21 +20,21 @@ export type Contest = {
     problems: ProblemSet
 };
 
-export type ContestSet = {
+type ContestSet = {
     [index: string]: Contest
 };
 
-export type ContestsData = {
+type ContestsData = {
     [index: string]: ContestSet
 };
 
-export type CommitInfo = {
+type CommitInfo = {
     id: string,
     short: string,
     date:string 
 };
 
-export type Article = {
+type Article = {
     title: string,
     tags: Array<string>,
     author: string,
@@ -42,24 +42,24 @@ export type Article = {
     lastCommit: CommitInfo
 };
 
-export type ArticleSet = {
+type ArticleSet = {
     [index: string]: Article
 };
 
-export type ContestArticleSet = {
+type ContestArticleSet = {
     [index: string]: ArticleSet
 };
 
-export type ArticleList = {
+type ArticleList = {
     [index: string]: ContestArticleSet
 };
 
-export type ArticleListData = {
+type ArticleListData = {
     lastCommit: CommitInfo,
     data: ArticleList
 };
 
-export type GlobalData = {
+type GlobalData = {
     contests: ContestsData,
     translations: ArticleListData,
     solutions: ArticleListData,
