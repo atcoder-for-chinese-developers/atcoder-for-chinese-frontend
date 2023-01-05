@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Container, Menu } from 'semantic-ui-react';
 import './Nav.css';
 
-import logo from './logo.png';
+import logo from '../static/logo.png';
 
 function Nav() {
   return (
@@ -13,6 +13,9 @@ function Nav() {
           <Menu.Item as={Link} to="/abc">ABC</Menu.Item>
           <Menu.Item as={Link} to="/arc">ARC</Menu.Item>
           <Menu.Item as={Link} to="/agc">AGC</Menu.Item>
+          <Menu.Item as={Link} to="/abc_like">ABC Like</Menu.Item>
+          <Menu.Item as={Link} to="/arc_like">ARC Like</Menu.Item>
+          <Menu.Item as={Link} to="/agc_like">AGC Like</Menu.Item>
           <Menu.Item as={Link} to="/ahc">AHC</Menu.Item>
           <Menu.Item as={Link} to="/others">其它</Menu.Item>
         </Container>

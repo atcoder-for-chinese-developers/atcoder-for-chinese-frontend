@@ -4,8 +4,6 @@
 
 这个版本是 AtCoder for Chinese 的第二版本（目前处于两个版本同时开发的状态）。
 
-该版本使用 React 框架，由 [Create React App](https://github.com/facebook/create-react-app) 创建。
-
 ## 开发指南
 
 ### 环境需求

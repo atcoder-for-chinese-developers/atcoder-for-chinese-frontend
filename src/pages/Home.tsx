@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import './Home.css';
 
-import ContestList from './ContestList';
+import ContestList from '../components/ContestList';
 
 import { Container } from 'semantic-ui-react';
 import { useEffect } from 'react';

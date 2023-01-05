@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import Article from "./Article";
-import { getProblemData } from "./util";
+import Article from "../components/Article";
+import { getProblemData } from "../js/util";
 import './ArticlePage.css';
 import { useEffect } from "react";
 

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container, Header, Icon, Segment, Table } from 'semantic-ui-react';
-import ProblemDisplayer from './ProblemDisplayer';
+import ProblemDisplayer from '../components/ProblemDisplayer';
 import './ProblemPage.css';
 
 import dayjs from 'dayjs';
-import { getProblemData } from './util';
+import { getProblemData } from '../js/util';
 
 interface ProblemPageProps {
   data: GlobalData;

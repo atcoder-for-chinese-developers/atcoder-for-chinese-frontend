@@ -1,13 +1,23 @@
 import './App.css';
+import 'nprogress/nprogress.css';
 
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Loader, Sticky } from 'semantic-ui-react';
+import nProgress from 'nprogress';
+import Nav from './components/Nav';
 
-import Home from './Home';
-import Nav from './Nav';
-import ProblemPage from './ProblemPage';
-import ArticlePage from './ArticlePage';
+const Home = lazy(() => import('./pages/Home'));
+const ProblemPage = lazy(() => import('./pages/ProblemPage'));
+const ArticlePage = lazy(() => import('./pages/ArticlePage'));
+
+function NProgress(props: {}) {
+  useEffect(() => {
+    nProgress.start();
+    return () => { nProgress.done(); }
+  })
+  return <Fragment/>
+}
 
 function App() {
   const [data, setData] = useState<GlobalData>({
@@ -64,13 +74,15 @@ function App() {
 
   if (data.ready) {
     content = (
-      <Routes>
-        <Route path="/" element={<Home data={data}/>} />
-        <Route path="/problem/:contest/:problem" element={<ProblemPage data={data}/>}/>
-        <Route path="/translation/:contest/:problem/:id" element={<ArticlePage data={data} type='translations'/>}/>
-        <Route path="/solution/:contest/:problem/:id" element={<ArticlePage data={data} type='solutions'/>}/>
-        <Route path="/:tab" element={<Home data={data}/>} />
-      </Routes>
+      <Suspense fallback={<NProgress/>}>
+        <Routes>
+          <Route path="/" element={<Home data={data}/>} />
+          <Route path="/problem/:contest/:problem" element={<ProblemPage data={data}/>}/>
+          <Route path="/translation/:contest/:problem/:id" element={<ArticlePage data={data} type='translations'/>}/>
+          <Route path="/solution/:contest/:problem/:id" element={<ArticlePage data={data} type='solutions'/>}/>
+          <Route path="/:tab" element={<Home data={data}/>} />
+        </Routes>
+      </Suspense>
     );
   } else {
     content = <Loader active inline='centered' size='big' className='Loader'>正在加载</Loader>;
