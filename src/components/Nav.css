@@ -1,3 +1,24 @@
 .Logo {
     width: 5em !important;
 }
+
+.SidebarHeader {
+    height: 48px;
+    text-align: center;
+}
+.SidebarIcon {
+    display: inline-block !important;
+}
+
+.ContestIconBlue {
+    color: #0000FF;
+}
+.ContestIconOrange {
+    color: #FF8000;
+}
+.ContestIconRed {
+    color: #FF0000;
+}
+.ContestIconBlack {
+    color: #000000;
+}

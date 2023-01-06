@@ -1,9 +1,9 @@
 import './App.css';
 import 'nprogress/nprogress.css';
 
-import { Fragment, lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { Fragment, lazy, Suspense, useEffect, useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { Loader, Sticky } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 import nProgress from 'nprogress';
 import Nav from './components/Nav';
 
@@ -40,8 +40,6 @@ function App() {
     },
     ready: false
   });
-
-  const contextRef = useRef<HTMLDivElement | null>(null);
 
   async function loadData() {
     let contestsRes = await fetch("/spiders/data.json");
@@ -89,9 +87,9 @@ function App() {
   }
 
   return (
-    <div className="App" ref={contextRef}>
+    <div className="App">
       <HashRouter>
-        <Sticky context={contextRef}><Nav /></Sticky>
+        <Nav />
         { content }
       </HashRouter>
     </div>
