@@ -8,7 +8,8 @@ import dayjs from 'dayjs';
 import { getProblemData } from '../js/util';
 
 interface ProblemPageProps {
-  data: GlobalData;
+  data: GlobalData,
+  setActiveNavItem: React.Dispatch<React.SetStateAction<string | null>>
 };
 
 function ProblemPage(props: ProblemPageProps) {
@@ -18,6 +19,7 @@ function ProblemPage(props: ProblemPageProps) {
 
   useEffect(() => {
     if (problem) document.title = `${ (problem as Problem).title } - AtCoder for Chinese`;
+    props.setActiveNavItem(null);
   });
 
   if (!problem) return (

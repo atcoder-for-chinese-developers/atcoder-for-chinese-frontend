@@ -64,7 +64,11 @@ const navItems: navItem[] = [
   }
 ]
 
-function Nav() {
+interface NavProps {
+  activeItem: string | null
+};
+
+function Nav(props: NavProps) {
   const windowSize = useWindowSize();
   const [sidebarVisibility, setSidebarVisibility] = useState<boolean>(false);
 
@@ -76,7 +80,7 @@ function Nav() {
           {
             windowSize.width > 991 ?
               navItems.map(item => (
-                <Menu.Item as={ Link } to={ item.to }>
+                <Menu.Item as={ Link } to={ item.to } key={ item.key } active={ item.key === props.activeItem }>
                   { item.icon }
                   { item.name }
                 </Menu.Item>
@@ -110,7 +114,7 @@ function Nav() {
             </Menu.Item>
             {
               navItems.map(item => (
-                <Menu.Item as={ Link } to={ item.to }>
+                <Menu.Item as={ Link } to={ item.to } key={ item.key } active={ item.key === props.activeItem }>
                   { item.icon }
                   { item.name }
                 </Menu.Item>

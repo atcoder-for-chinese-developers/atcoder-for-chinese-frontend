@@ -41,6 +41,8 @@ function App() {
     ready: false
   });
 
+  const [activeNavItem, setActiveNavItem] = useState<string | null>(null);
+
   async function loadData() {
     let contestsRes = await fetch("/spiders/data.json");
     let translationsRes = await fetch("/translations/list.json");
@@ -70,15 +72,20 @@ function App() {
 
   let content;
 
+  const pageProps = {
+    data: data,
+    setActiveNavItem: setActiveNavItem
+  };
+
   if (data.ready) {
     content = (
       <Suspense fallback={<NProgress/>}>
         <Routes>
-          <Route path="/" element={<Home data={data}/>} />
-          <Route path="/problem/:contest/:problem" element={<ProblemPage data={data}/>}/>
-          <Route path="/translation/:contest/:problem/:id" element={<ArticlePage data={data} type='translations'/>}/>
-          <Route path="/solution/:contest/:problem/:id" element={<ArticlePage data={data} type='solutions'/>}/>
-          <Route path="/:tab" element={<Home data={data}/>} />
+          <Route path="/" element={<Home {...pageProps}/>} />
+          <Route path="/problem/:contest/:problem" element={<ProblemPage {...pageProps}/>}/>
+          <Route path="/translation/:contest/:problem/:id" element={<ArticlePage {...pageProps} type='translations'/>}/>
+          <Route path="/solution/:contest/:problem/:id" element={<ArticlePage {...pageProps} type='solutions'/>}/>
+          <Route path="/:tab" element={<Home {...pageProps}/>} />
         </Routes>
       </Suspense>
     );
@@ -89,7 +96,7 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-        <Nav />
+        <Nav activeItem={ activeNavItem }/>
         { content }
       </HashRouter>
     </div>

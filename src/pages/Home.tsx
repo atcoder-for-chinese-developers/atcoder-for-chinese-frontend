@@ -7,7 +7,8 @@ import { Container } from 'semantic-ui-react';
 import { useEffect } from 'react';
 
 interface HomeProps {
-  data: GlobalData;
+  data: GlobalData,
+  setActiveNavItem: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 function Home(props: HomeProps) {
@@ -24,7 +25,8 @@ function Home(props: HomeProps) {
     else if (tab === 'ahc') title = 'AtCoder Heuristic Contest';
     else title = '其它比赛';
     document.title = `${ title } - AtCoder for Chinese`;
-  })
+    props.setActiveNavItem(tab || null);
+  });
 
   return (
     <div className="Home">

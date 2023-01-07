@@ -6,7 +6,8 @@ import { useEffect } from "react";
 
 interface ArticlePageProps {
   data: GlobalData,
-  type: 'translations' | 'solutions'
+  type: 'translations' | 'solutions',
+  setActiveNavItem: React.Dispatch<React.SetStateAction<string | null>>
 };
 
 function ArticlePage(props: ArticlePageProps) {
@@ -17,6 +18,7 @@ function ArticlePage(props: ArticlePageProps) {
 
   useEffect(() => {
     document.title = `${ article.title } - ${ problem.title } - AtCoder for Chinese`;
+    props.setActiveNavItem(null);
   });
 
   return (
