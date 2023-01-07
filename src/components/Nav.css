@@ -22,3 +22,7 @@
 .ContestIconBlack {
     color: #000000;
 }
+
+.NoShadow {
+    box-shadow: none !important;
+}

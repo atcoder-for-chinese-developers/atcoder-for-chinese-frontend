@@ -5,6 +5,7 @@ import './Nav.css';
 import logo from '../static/logo.png';
 import { useWindowSize } from '../js/useWindowSize';
 import { useState } from 'react';
+import { useScrollPosition } from '../js/useScrollPosition';
 
 type navItem = {
   name: string,
@@ -70,11 +71,12 @@ interface NavProps {
 
 function Nav(props: NavProps) {
   const windowSize = useWindowSize();
+  const scrollPosition = useScrollPosition();
   const [sidebarVisibility, setSidebarVisibility] = useState<boolean>(false);
 
   return (
     <>
-      <Menu size='large' fixed='top' borderless>
+      <Menu size='large' fixed='top' borderless className={ scrollPosition == 0 ? 'NoShadow' : undefined }>
         <Container>
           <Menu.Item as={ Link } to='/' icon><img src={ logo } alt="Atcoder for Chinese" className='Logo'/></Menu.Item>
           {
