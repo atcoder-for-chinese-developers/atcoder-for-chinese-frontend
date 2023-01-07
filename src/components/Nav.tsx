@@ -76,7 +76,7 @@ function Nav(props: NavProps) {
 
   return (
     <>
-      <Menu size='large' fixed='top' borderless className={ scrollPosition == 0 ? 'NoShadow' : undefined }>
+      <Menu size='large' fixed='top' borderless className={ scrollPosition === 0 ? 'NoShadow' : undefined }>
         <Container>
           <Menu.Item as={ Link } to='/' icon><img src={ logo } alt="Atcoder for Chinese" className='Logo'/></Menu.Item>
           {
