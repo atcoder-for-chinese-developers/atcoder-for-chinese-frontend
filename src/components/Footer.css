@@ -1,0 +1,25 @@
+.Footer {
+    margin-top: 15px !important;
+}
+
+.VersionText {
+    font-size: 14px;
+    margin-left: 1em;
+    margin-right: 1em;
+    color: #777;
+    display: inline-block;
+}
+.VersionText code {
+    margin-left: 5px;
+}
+.VersionText code a {
+    color: #777;
+}
+
+.IconLinks {
+    margin-top: 1em;
+    font-size: 24px;
+}
+.IconLinks a {
+    color: #000;
+}

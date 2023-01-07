@@ -6,6 +6,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Loader } from 'semantic-ui-react';
 import nProgress from 'nprogress';
 import Nav from './components/Nav';
+import Footer from './components/Footer';
 
 const Home = lazy(() => import('./pages/Home'));
 const ProblemPage = lazy(() => import('./pages/ProblemPage'));
@@ -98,6 +99,7 @@ function App() {
       <HashRouter>
         <Nav activeItem={ activeNavItem }/>
         { content }
+        <Footer data={ data }/>
       </HashRouter>
     </div>
   );

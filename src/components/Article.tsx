@@ -34,12 +34,12 @@ function Article(props: ArticleProps) {
     return (
       <>
         <Container>
-            <Header as='h1'>
+          <Header as='h1'>
             { props.article.title }
-            </Header>
+          </Header>
         </Container>
         <Divider></Divider>
-        <Container dangerouslySetInnerHTML={ { __html: content.content } }></Container>
+        <Container className='markdown-body' dangerouslySetInnerHTML={ { __html: content.content } }></Container>
       </>
     )
   } else return (
