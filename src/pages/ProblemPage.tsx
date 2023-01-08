@@ -4,7 +4,6 @@ import { Container, Header, Icon, Segment, Table } from 'semantic-ui-react';
 import ProblemDisplayer from '../components/ProblemDisplayer';
 import './ProblemPage.css';
 
-import dayjs from 'dayjs';
 import { getProblemData } from '../js/util';
 import { formatDate } from '../js/formatDate';
 
