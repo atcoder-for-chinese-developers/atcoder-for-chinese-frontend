@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './ProblemDisplayer.css';
+import StatsDisplayer from './StatsDisplayer';
 
 interface ProblemDisplayerProps {
   external?: boolean;
@@ -69,13 +70,37 @@ function ProblemDisplayer(props: ProblemDisplayerProps) {
     );
   }
 
+  const translationNumber = Object.getOwnPropertyNames(problem.translations).length;
+  const solutionNumber = Object.getOwnPropertyNames(problem.solutions).length;
+
   return (
-    <span
-      title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }
-    >
-      
-      <span className={ props.large ? 'LargeDifficultyDisplayer' : (props.small ? 'SmallDifficultyDisplayer' : 'DifficultyDisplayer') } style={ getDifficultyDisplayerStyle(problem.difficulty) }></span>
-      { getTextElement(problem.title) }
+    <span>
+      <StatsDisplayer
+        stats={
+          [
+            {
+              title: '翻译',
+              number: translationNumber,
+              key: 'translations',
+              status: (translationNumber > 0)
+            },
+            {
+              title: '题解',
+              number: solutionNumber,
+              key: 'solutions',
+              status: (solutionNumber > 0)
+            }
+          ]
+        }
+        large={ props.large }
+        small={ props.small }
+      />
+      <span
+        title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }
+        className={ props.large ? 'LargeDifficultyDisplayer' : (props.small ? 'SmallDifficultyDisplayer' : 'DifficultyDisplayer') }
+        style={ getDifficultyDisplayerStyle(problem.difficulty) }
+      />
+      <span title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }>{ getTextElement(problem.title) }</span>
     </span>
   );
 }

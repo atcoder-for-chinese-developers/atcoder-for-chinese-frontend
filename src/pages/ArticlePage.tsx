@@ -13,8 +13,8 @@ interface ArticlePageProps {
 function ArticlePage(props: ArticlePageProps) {
   const param = useParams();
   
-  const article = props.data[props.type].data[param.contest as string][param.problem as string][param.id as string];
   const problem = getProblemData(param, props.data) as Problem;
+  const article = problem[props.type][param.id as string];
 
   useEffect(() => {
     document.title = `${ article.title } - ${ problem.title } - AtCoder for Chinese`;

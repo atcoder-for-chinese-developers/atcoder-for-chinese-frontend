@@ -30,8 +30,8 @@ function ProblemPage(props: ProblemPageProps) {
     </div>
   )
 
-  let translations = (props.data.translations.data[params.contest as string] || {})[params.problem as string] || {};
-  let solutions = (props.data.solutions.data[params.contest as string] || {})[params.problem as string] || {};
+  let translations = problem.translations;
+  let solutions = problem.solutions;
 
   function getArticleTable(articles: ArticleSet, type: string) {
     if (Object.keys(articles).length === 0) {

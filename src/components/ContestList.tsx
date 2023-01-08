@@ -2,6 +2,7 @@ import './ContestList.css';
 
 import { Table } from 'semantic-ui-react';
 import ProblemDisplayer from './ProblemDisplayer';
+import StatsDisplayer from './StatsDisplayer';
 
 interface ContestListProps {
   data: ContestSet;

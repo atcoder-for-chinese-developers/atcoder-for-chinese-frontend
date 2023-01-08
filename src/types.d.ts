@@ -1,33 +1,3 @@
-type Problem = {
-    id: string,
-    contest_id: string,
-    problem_index: string,
-    name: string,
-    title: string,
-    difficulty: number | null
-};
-
-type ProblemSet = {
-    [index: string]: Problem
-};
-
-type Contest = {
-    id: string,
-    start_epoch_second: number,
-    duration_second: number,
-    title: string,
-    rate_change: string,
-    problems: ProblemSet
-};
-
-type ContestSet = {
-    [index: string]: Contest
-};
-
-type ContestsData = {
-    [index: string]: ContestSet
-};
-
 type CommitInfo = {
     id: string,
     short: string,
@@ -56,7 +26,6 @@ type ArticleList = {
 
 type ArticleListData = {
     lastCommit: CommitInfo,
-    data: ArticleList
 };
 
 type GlobalData = {
@@ -64,4 +33,36 @@ type GlobalData = {
     translations: ArticleListData,
     solutions: ArticleListData,
     ready: Boolean
+};
+
+type Problem = {
+    id: string,
+    contest_id: string,
+    problem_index: string,
+    name: string,
+    title: string,
+    difficulty: number | null,
+    translations: ArticleSet,
+    solutions: ArticleSet
+};
+
+type ProblemSet = {
+    [index: string]: Problem
+};
+
+type Contest = {
+    id: string,
+    start_epoch_second: number,
+    duration_second: number,
+    title: string,
+    rate_change: string,
+    problems: ProblemSet
+};
+
+type ContestSet = {
+    [index: string]: Contest
+};
+
+type ContestsData = {
+    [index: string]: ContestSet
 };

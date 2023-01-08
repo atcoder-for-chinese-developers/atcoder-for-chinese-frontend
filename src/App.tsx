@@ -29,7 +29,6 @@ function App() {
         short: '',
         date: ''
       },
-      data: {}
     },
     solutions: {
       lastCommit: {
@@ -37,7 +36,6 @@ function App() {
         short: '',
         date: ''
       },
-      data: {}
     },
     ready: false
   });
@@ -51,6 +49,24 @@ function App() {
     let contests = await contestsRes.json();
     let translations = await translationsRes.json();
     let solutions = await solutionsRes.json();
+    for (const type in contests) { 
+      for (const contestID in contests[type]) {
+        for (const problemID in contests[type][contestID].problems) {
+          if (translations.data[contestID]) {
+            if (translations.data[contestID][problemID]) {
+              contests[type][contestID].problems[problemID].translations = JSON.parse(JSON.stringify(translations.data[contestID][problemID]));
+            } else contests[type][contestID].problems[problemID].translations = {};
+          } else contests[type][contestID].problems[problemID].translations = {};
+          if (solutions.data[contestID]) {
+            if (solutions.data[contestID][problemID]) {
+              contests[type][contestID].problems[problemID].solutions = JSON.parse(JSON.stringify(solutions.data[contestID][problemID]));
+            } else contests[type][contestID].problems[problemID].solutions = {};
+          } else contests[type][contestID].problems[problemID].solutions = {};
+        }
+      }
+    }
+    delete translations.data;
+    delete solutions.data;
     return {
       contests: contests,
       translations: translations,

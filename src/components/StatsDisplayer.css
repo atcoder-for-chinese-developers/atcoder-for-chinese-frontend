@@ -1,0 +1,30 @@
+.StatBlock {
+    display: inline-block;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: 12px;
+    height: 12px;
+}
+
+.LargeStatBlock {
+    display: inline-block;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: 20px;
+    height: 20px;
+}
+
+.SmallStatBlock {
+    display: inline-block;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: 9px;
+    height: 9px;
+}
+
+.StatBlockTrue {
+    background-color: rgb(0, 128, 0);
+}
+.StatBlockFalse {
+    background-color: #aaa;
+}
