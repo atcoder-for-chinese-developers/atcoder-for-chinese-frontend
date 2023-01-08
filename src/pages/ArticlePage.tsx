@@ -23,7 +23,12 @@ function ArticlePage(props: ArticlePageProps) {
 
   return (
     <div className='ArticlePage'>
-      <Article path={ `/${ props.type }/${ param.contest }.${ param.problem }.${ param.id }.html` } article={ article } problem={ problem } type={ props.type }/>
+      <Article
+        path={ `${ props.type === 'translations' ? process.env.REACT_APP_TRANSLATIONS_PATH : process.env.REACT_APP_SOLUTIONS_PATH }/${ param.contest }.${ param.problem }.${ param.id }.html` }
+        article={ article }
+        problem={ problem }
+        type={ props.type }
+      />
     </div>
   )
 }

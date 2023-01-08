@@ -43,9 +43,9 @@ function App() {
   const [activeNavItem, setActiveNavItem] = useState<string | null>(null);
 
   async function loadData() {
-    let contestsRes = await fetch("/spiders/data.json");
-    let translationsRes = await fetch("/translations/list.json");
-    let solutionsRes = await fetch("/solutions/list.json");
+    let contestsRes = await fetch(`${ process.env.REACT_APP_SPIDERS_PATH }/data.json`);
+    let translationsRes = await fetch(`${ process.env.REACT_APP_TRANSLATIONS_PATH }/list.json`);
+    let solutionsRes = await fetch(`${ process.env.REACT_APP_SOLUTIONS_PATH }/list.json`);
     let contests = await contestsRes.json();
     let translations = await translationsRes.json();
     let solutions = await solutionsRes.json();
