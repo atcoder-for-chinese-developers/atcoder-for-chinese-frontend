@@ -6,6 +6,7 @@ interface ProblemDisplayerProps {
   link?: string;
   problem: Problem;
   large?: boolean;
+  small?: boolean;
 };
 
 function ProblemDisplayer(props: ProblemDisplayerProps) {
@@ -73,7 +74,7 @@ function ProblemDisplayer(props: ProblemDisplayerProps) {
       title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }
     >
       
-      <span className={ props.large ? 'LargeDifficultyDisplayer' : 'DifficultyDisplayer' } style={ getDifficultyDisplayerStyle(problem.difficulty) }></span>
+      <span className={ props.large ? 'LargeDifficultyDisplayer' : (props.small ? 'SmallDifficultyDisplayer' : 'DifficultyDisplayer') } style={ getDifficultyDisplayerStyle(problem.difficulty) }></span>
       { getTextElement(problem.title) }
     </span>
   );

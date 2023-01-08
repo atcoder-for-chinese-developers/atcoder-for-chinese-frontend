@@ -46,3 +46,13 @@
 	height: 20px;
 	width: 20px;
 }
+
+.SmallDifficultyDisplayer {
+    display: inline-block;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 1.667px;
+	margin-right: 5px;
+	height: 9px;
+	width: 9px;
+}

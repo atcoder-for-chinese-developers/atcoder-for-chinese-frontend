@@ -23,7 +23,7 @@ function ArticlePage(props: ArticlePageProps) {
 
   return (
     <div className='ArticlePage'>
-      <Article path={ `/${ props.type }/${ param.contest }.${ param.problem }.${ param.id }.html` } article={ article } problem={ problem }/>
+      <Article path={ `/${ props.type }/${ param.contest }.${ param.problem }.${ param.id }.html` } article={ article } problem={ problem } type={ props.type }/>
     </div>
   )
 }

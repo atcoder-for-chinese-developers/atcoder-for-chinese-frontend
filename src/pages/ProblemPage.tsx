@@ -6,6 +6,7 @@ import './ProblemPage.css';
 
 import dayjs from 'dayjs';
 import { getProblemData } from '../js/util';
+import { formatDate } from '../js/formatDate';
 
 interface ProblemPageProps {
   data: GlobalData,
@@ -32,11 +33,6 @@ function ProblemPage(props: ProblemPageProps) {
 
   let translations = (props.data.translations.data[params.contest as string] || {})[params.problem as string] || {};
   let solutions = (props.data.solutions.data[params.contest as string] || {})[params.problem as string] || {};
-
-  function formatDate(date: string | undefined) {
-    if ((date || '') === '') return '';
-    return dayjs(new Date(date as string)).format('YYYY 年 MM 月 DD 日 hh:mm');
-  }
 
   function getArticleTable(articles: ArticleSet, type: string) {
     if (Object.keys(articles).length === 0) {
