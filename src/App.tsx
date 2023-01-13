@@ -2,7 +2,7 @@ import './App.css';
 import 'nprogress/nprogress.css';
 
 import { Fragment, lazy, Suspense, useEffect, useState } from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { Loader } from 'semantic-ui-react';
 import nProgress from 'nprogress';
 import Nav from './components/Nav';
@@ -112,11 +112,20 @@ function App() {
 
   return (
     <div className="App">
-      <HashRouter>
-        <Nav activeItem={ activeNavItem }/>
-        { content }
-        <Footer data={ data }/>
-      </HashRouter>
+      {
+        process.env.REACT_APP_ROUTER === 'Hash' ?
+          <HashRouter>
+            <Nav activeItem={ activeNavItem }/>
+            { content }
+            <Footer data={ data }/>
+          </HashRouter>
+        :
+          <BrowserRouter>
+            <Nav activeItem={ activeNavItem }/>
+            { content }
+            <Footer data={ data }/>
+          </BrowserRouter>
+      }
     </div>
   );
 }
