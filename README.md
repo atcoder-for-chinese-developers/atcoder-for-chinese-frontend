@@ -1,5 +1,7 @@
 # AtCoder for Chinese 第二版
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/db08db41-03f8-480a-a02e-9febac1995ef/deploy-status)](https://app.netlify.com/sites/atcoder-for-chinese/deploys)
+
 ## 关于
 
 这个版本是 AtCoder for Chinese 的第二版本（目前处于两个版本同时开发的状态）。
