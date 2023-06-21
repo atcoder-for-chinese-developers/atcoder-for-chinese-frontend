@@ -2,8 +2,9 @@ import './App.css';
 import 'nprogress/nprogress.css';
 
 import { Fragment, lazy, Suspense, useEffect, useState } from 'react';
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Loader } from 'semantic-ui-react';
+import ReactGA from 'react-ga4';
 import nProgress from 'nprogress';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -39,6 +40,14 @@ function App() {
     },
     ready: false
   });
+
+  if (process.env.REACT_APP_GA) {
+    const location = useLocation();
+    useEffect(() => {
+      ReactGA.initialize(process.env.REACT_APP_GA as string);
+      ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search + location.hash });
+    }, [location]);
+  }
 
   const [activeNavItem, setActiveNavItem] = useState<string | null>(null);
 
