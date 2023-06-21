@@ -6,6 +6,7 @@ import './ProblemPage.css';
 
 import { getProblemData } from '../js/util';
 import { formatDate } from '../js/formatDate';
+import { useGA } from '../js/useGA';
 
 interface ProblemPageProps {
   data: GlobalData,
@@ -14,6 +15,7 @@ interface ProblemPageProps {
 
 function ProblemPage(props: ProblemPageProps) {
   const params = useParams();
+  useGA();
 
   let problem = getProblemData(params, props.data);
 

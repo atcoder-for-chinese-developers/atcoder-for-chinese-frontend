@@ -5,6 +5,7 @@ import ContestList from '../components/ContestList';
 
 import { Container } from 'semantic-ui-react';
 import { useEffect } from 'react';
+import { useGA } from '../js/useGA';
 
 interface HomeProps {
   data: GlobalData,
@@ -13,6 +14,7 @@ interface HomeProps {
 
 function Home(props: HomeProps) {
   const params = useParams();
+  useGA();
 
   const tab = params.hasOwnProperty('tab') ? (params.tab as string) : 'abc';
 
