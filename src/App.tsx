@@ -41,13 +41,13 @@ function App() {
     ready: false
   });
 
-  if (process.env.REACT_APP_GA) {
-    const location = useLocation();
-    useEffect(() => {
+  const location = useLocation();
+  useEffect(() => {
+    if (process.env.REACT_APP_GA) {
       ReactGA.initialize(process.env.REACT_APP_GA as string);
       ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search + location.hash });
-    }, [location]);
-  }
+    }
+  }, [location]);
 
   const [activeNavItem, setActiveNavItem] = useState<string | null>(null);
 
