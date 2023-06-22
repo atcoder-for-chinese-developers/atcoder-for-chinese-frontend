@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { Container, Divider, Header, Icon, Label, Loader, Segment } from "semantic-ui-react";
+import { createRef, useState } from "react";
+import { Container, Divider, Grid, Header, Icon, Label, Loader, Ref, Segment, Sticky } from "semantic-ui-react";
 import { formatDate } from "../js/formatDate";
 import ProblemDisplayer from "./ProblemDisplayer";
 
 import './Article.css';
+import TableOfContent from "./TableOfContent";
+import { useWindowSize } from "../js/useWindowSize";
 
 interface ArticleProps {
   path: string,
@@ -20,6 +22,11 @@ type ArticleContent = {
 function Article(props: ArticleProps) {
   const [content, setContent] = useState<ArticleContent>({ content: '', ready: false });
   const [tagsVisibility, setTagsVisibility] = useState<boolean>(false);
+
+  const windowSize = useWindowSize();
+
+  const contentRef = createRef<HTMLDivElement>();
+  const containerRef = createRef<HTMLDivElement>();
 
   async function loadContent() {
     let res = await fetch(props.path);
@@ -93,7 +100,26 @@ function Article(props: ArticleProps) {
           </Segment>
         </Container>
         <Divider></Divider>
-        <Container className='markdown-body' dangerouslySetInnerHTML={ { __html: content.content } }></Container>
+        {
+          windowSize.width <= 991 ? (
+            <Ref innerRef={contentRef}><Container className='markdown-body' dangerouslySetInnerHTML={ { __html: content.content } }></Container></Ref>
+          ) : (
+            <Ref innerRef={containerRef}>
+              <Container>
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column width={13}>
+                      <div className='markdown-body' ref={contentRef} dangerouslySetInnerHTML={ { __html: content.content } }></div>
+                    </Grid.Column>
+                    <Grid.Column width={3}>
+                      <Sticky context={containerRef} offset={74}><TableOfContent contentRef={ contentRef } title={ props.article.title }/></Sticky>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </Container>
+            </Ref>
+          )
+        }
       </>
     )
   } else return (
