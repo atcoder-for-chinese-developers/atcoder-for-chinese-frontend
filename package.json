@@ -30,6 +30,7 @@
     "start": "env-cmd -f .env.development react-scripts start",
     "build:gh-pages": "env-cmd -f .env.gh-pages react-scripts build",
     "build:netlify": "env-cmd -f .env.netlify react-scripts build",
+    "build:cloudflare-pages": "env-cmd -f .env.cloudflare-pages react-scripts build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject"
   },
