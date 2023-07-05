@@ -1,39 +1,18 @@
-import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useRouteLoaderData } from 'react-router-dom';
 import { Container, Header, Icon, Segment, Table } from 'semantic-ui-react';
 import ProblemDisplayer from '../components/ProblemDisplayer';
 import './ProblemPage.css';
 
-import { getProblemData } from '../js/util';
 import { formatDate } from '../js/formatDate';
-import { useGA } from '../js/useGA';
 
-interface ProblemPageProps {
-  data: GlobalData,
-  setActiveNavItem: React.Dispatch<React.SetStateAction<string | null>>
-};
+function ProblemPage() {
+  const params = useParams() as {[id: string]: string};
+  const {articles} = useRouteLoaderData('problem') as {articles: ProblemArticleSet};
+  const {siteData, problemStats} = useRouteLoaderData('site') as {siteData: SiteData, problemStats: ProblemStatSet};
+  const problem = siteData.contests[params.contest].problems[params.problem];
 
-function ProblemPage(props: ProblemPageProps) {
-  const params = useParams();
-  useGA();
-
-  let problem = getProblemData(params, props.data);
-
-  useEffect(() => {
-    if (problem) document.title = `${ (problem as Problem).title } - AtCoder for Chinese`;
-    props.setActiveNavItem(null);
-  });
-
-  if (!problem) return (
-    <div className="problemPage">
-      <Container>
-        <Header as="h1">未找到对应题目</Header>
-      </Container>
-    </div>
-  )
-
-  let translations = problem.translations;
-  let solutions = problem.solutions;
+  let translations = articles.translations;
+  let solutions = articles.solutions;
 
   function getArticleTable(articles: ArticleSet, type: string) {
     if (Object.keys(articles).length === 0) {
@@ -50,10 +29,10 @@ function ProblemPage(props: ProblemPageProps) {
     for (let key in articles) {
       elementList.push(
         <Table.Row key={ key }>
-          <Table.Cell><Link to={ '/' + type + '/' + params.contest + '/' + params.problem + '/' + key }>{ articles[key].title }</Link></Table.Cell>
+          <Table.Cell><Link to={ `/${params.site}/${params.contest}/${params.problem}/${type}/${key}` }>{ articles[key].title }</Link></Table.Cell>
           <Table.Cell>{ articles[key].author || "" }</Table.Cell>
           <Table.Cell>{ formatDate(articles[key].created) }</Table.Cell>
-          <Table.Cell>{ formatDate(articles[key].lastCommit.date) }</Table.Cell>
+          <Table.Cell>{  formatDate(articles[key].lastCommit.date) }</Table.Cell>
         </Table.Row>
       );
     }
@@ -81,16 +60,16 @@ function ProblemPage(props: ProblemPageProps) {
     <div className='ProblemPage'>
       <Container>
         <Header as="h1">
-          <ProblemDisplayer large problem={ problem } external={ true } link={ 'https://atcoder.jp/contests/' + params.contest + '/tasks/' + params.problem }/>
+          <ProblemDisplayer large problem={ problem } stats={ problemStats[`${params.contest}/${params.problem}`] || [0, 0] } external={ true } link={ problem.link || undefined }/>
         </Header>
         <Header as='h2' attached='top' block size='medium'>
           翻译
         </Header>
-        { getArticleTable(translations, 'translation') }
+        { getArticleTable(translations, 'translations') }
         <Header as='h2' attached='top' block size='medium'>
           题解
         </Header>
-        { getArticleTable(solutions, 'solution') }
+        { getArticleTable(solutions, 'solutions') }
       </Container>
     </div>
   )

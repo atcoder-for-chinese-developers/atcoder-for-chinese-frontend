@@ -1,35 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useParams, useRouteLoaderData } from "react-router-dom";
 import Article from "../components/Article";
-import { getProblemData } from "../js/util";
 import './ArticlePage.css';
-import { useEffect } from "react";
-import { useGA } from "../js/useGA";
 
-interface ArticlePageProps {
-  data: GlobalData,
-  type: 'translations' | 'solutions',
-  setActiveNavItem: React.Dispatch<React.SetStateAction<string | null>>
-};
-
-function ArticlePage(props: ArticlePageProps) {
-  const param = useParams();
-  useGA();
+function ArticlePage() {
+  const params = useParams() as {[id: string]: string};
+  const {siteData, problemStats} = useRouteLoaderData('site') as {siteData: SiteData, problemStats: ProblemStatSet};
+  const {article} = useRouteLoaderData('article') as {article: ArticleData};
   
-  const problem = getProblemData(param, props.data) as Problem;
-  const article = problem[props.type][param.id as string];
-
-  useEffect(() => {
-    document.title = `${ article.title } - ${ problem.title } - AtCoder for Chinese`;
-    props.setActiveNavItem(null);
-  });
+  const problem = siteData.contests[params.contest].problems[params.problem];
 
   return (
     <div className='ArticlePage'>
       <Article
-        path={ `${ props.type === 'translations' ? process.env.REACT_APP_TRANSLATIONS_PATH : process.env.REACT_APP_SOLUTIONS_PATH }/${ param.contest }.${ param.problem }.${ param.id }.html` }
         article={ article }
         problem={ problem }
-        type={ props.type }
+        stats={problemStats[`${params.contest}/${params.problem}`]  || [0, 0]}
       />
     </div>
   )

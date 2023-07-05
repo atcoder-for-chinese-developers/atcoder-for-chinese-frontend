@@ -5,6 +5,8 @@ import ProblemDisplayer from './ProblemDisplayer';
 
 interface ContestListProps {
   data: ContestSet;
+  problemStats: ProblemStatSet;
+  site: string;
 };
 
 function ContestList(props: ContestListProps) {
@@ -16,9 +18,10 @@ function ContestList(props: ContestListProps) {
     let problemElements = [];
     for (const problemID in problems) {
       const problem = problems[problemID];
+      const problemPath = `${contestID}/${problemID}`;
       problemElements.push(
-        <Table.Cell key={ problem.id } className='ProblemCell'>
-          <ProblemDisplayer problem={ problem } link={ '/problem/' + contestID + '/' + problemID }/>
+        <Table.Cell key={ problemID } className='ProblemCell'>
+          <ProblemDisplayer problem={ problem } stats={props.problemStats[problemPath] || [0, 0]} link={ '/' + props.site + '/' + contestID + '/' + problemID }/>
         </Table.Cell>
       )
     }
@@ -27,7 +30,11 @@ function ContestList(props: ContestListProps) {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan={ problemElements.length > 0 ? problemElements.length : 1 }>
-              <a rel="noreferrer" href={ 'https://atcoder.jp/contests/' + contestID } target="_blank">{ contest.title }</a>
+              {
+                contest.link ?
+                  <a rel="noreferrer" href={ contest.link } target="_blank">{ contest.title }</a>
+                : <span>{ contest.title }</span>
+              }
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
