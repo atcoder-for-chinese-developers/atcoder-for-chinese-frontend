@@ -1,3 +1,6 @@
 .ProblemCell {
     font-weight: unset !important;
 }
+.pagination-container {
+    text-align: center;
+}

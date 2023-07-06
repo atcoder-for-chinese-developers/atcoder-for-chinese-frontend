@@ -1,25 +1,25 @@
-.Footer {
+.footer {
     margin-top: 15px !important;
 }
 
-.VersionText {
+.version-text {
     font-size: 14px;
     margin-left: 1em;
     margin-right: 1em;
     color: #777;
     display: inline-block;
 }
-.VersionText code {
+.version-text code {
     margin-left: 5px;
 }
-.VersionText code a {
+.version-text code a {
     color: #777;
 }
 
-.IconLinks {
+.icon-links {
     margin-top: 1em;
     font-size: 24px;
 }
-.IconLinks a {
+.icon-links a {
     color: #000;
 }

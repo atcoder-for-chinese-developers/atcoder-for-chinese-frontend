@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Container, Icon, Menu, Sidebar } from 'semantic-ui-react';
 import './Nav.css';
 
@@ -7,66 +7,8 @@ import { useWindowSize } from '../js/useWindowSize';
 import { useState } from 'react';
 import { useScrollPosition } from '../js/useScrollPosition';
 
-type navItem = {
-  name: string,
-  icon: JSX.Element,
-  to: string,
-  key: string
-}
-
-const navItems: navItem[] = [
-  {
-    name: 'ABC',
-    icon: <i className='icon ContestIconBlue'>◉</i>,
-    to: '/abc',
-    key: 'abc'
-  },
-  {
-    name: 'ARC',
-    icon: <i className='icon ContestIconOrange'>◉</i>,
-    to: '/arc',
-    key: 'arc'
-  },
-  {
-    name: 'AGC',
-    icon: <i className='icon ContestIconRed'>◉</i>,
-    to: '/agc',
-    key: 'agc'
-  },
-  {
-    name: 'ABC Like',
-    icon: <i className='icon ContestIconBlue'>◉</i>,
-    to: '/abc_like',
-    key: 'abc_like'
-  },
-  {
-    name: 'ARC Like',
-    icon: <i className='icon ContestIconOrange'>◉</i>,
-    to: '/arc_like',
-    key: 'arc_like'
-  },
-  {
-    name: 'AGC Like',
-    icon: <i className='icon ContestIconRed'>◉</i>,
-    to: '/agc_like',
-    key: 'agc_like'
-  },
-  {
-    name: 'AHC',
-    icon: <i className='icon ContestIconBlack'>◉</i>,
-    to: '/ahc',
-    key: 'ahc'
-  },
-  {
-    name: 'Others',
-    icon: <i className='icon ContestIconBlack'>◉</i>,
-    to: '/others',
-    key: 'others'
-  }
-]
-
 interface NavProps {
-  activeItem: string | null
+  navItems: NavItem[]
 };
 
 function Nav(props: NavProps) {
@@ -81,8 +23,8 @@ function Nav(props: NavProps) {
           <Menu.Item as={ Link } to='/' icon><img src={ logo } alt="Atcoder for Chinese" className='Logo'/></Menu.Item>
           {
             windowSize.width > 991 ?
-              navItems.map(item => (
-                <Menu.Item as={ Link } to={ item.to } key={ item.key } active={ item.key === props.activeItem }>
+              props.navItems.map(item => (
+                <Menu.Item as={ item.navLink ? NavLink : Link } to={ item.to } key={ item.key }>
                   { item.icon }
                   { item.name }
                 </Menu.Item>
@@ -115,8 +57,8 @@ function Nav(props: NavProps) {
               <img src={ logo } alt="Atcoder for Chinese" className='Logo SidebarIcon'/>
             </Menu.Item>
             {
-              navItems.map(item => (
-                <Menu.Item as={ Link } to={ item.to } key={ item.key } active={ item.key === props.activeItem }>
+              props.navItems.map(item => (
+                <Menu.Item as={ item.navLink ? NavLink : Link } to={ item.to } key={ item.key }>
                   { item.icon }
                   { item.name }
                 </Menu.Item>

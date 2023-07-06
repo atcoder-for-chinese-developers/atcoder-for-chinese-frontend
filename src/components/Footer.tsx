@@ -3,40 +3,37 @@ import { Container, Icon, Segment } from "semantic-ui-react";
 import './Footer.css';
 
 interface FooterProps {
-  data: GlobalData
+  lastCommit: CommitInfo,
+  siteInfos: SiteInfoSet
 };
 
 function Footer(props: FooterProps) {
+  let links = [] as {link: string, icon: string, key: string, title: string}[];
+  for (const id in props.siteInfos) {
+    const site = props.siteInfos[id];
+    links.push({link: site.link, icon: site.icon, title: site.title, key: id});
+  }
   return (
     <>
-      <Segment vertical className='Footer'>
+      <Segment vertical className='footer'>
         <Container textAlign='center'>
           <div>
-            {
-              props.data.ready ?
-              (<>
-              <span className='VersionText markdown-body'>
-                翻译: 
-                <code title={ props.data.translations.lastCommit.date }>
-                  <a href={ '//github.com/atcoder-for-chinese-developers/translations/commit/' + props.data.translations.lastCommit.id }>
-                    { props.data.translations.lastCommit.short }
-                  </a>
-                </code>
-              </span>
-              <span className='VersionText markdown-body'>
-                题解: 
-                <code title={ props.data.solutions.lastCommit.date }>
-                  <a href={ '//github.com/atcoder-for-chinese-developers/solutions/commit/' + props.data.solutions.lastCommit.id }>
-                    { props.data.solutions.lastCommit.short }
-                  </a>
-                </code>
-              </span>
-              </>)
-              : null
-            }
+            <span className='version-text markdown-body'>
+              最后更新: 
+              <code title={ props.lastCommit.date }>
+                <a href={ '//github.com/atcoder-for-chinese-developers/articles/commit/' + props.lastCommit.id }>
+                  { props.lastCommit.short }
+                </a>
+              </code>
+            </span>
           </div>
-          <div className='IconLinks'>
-            <a href='//github.com/atcoder-for-chinese-developers/'><Icon name='github'/></a>
+          <div className='icon-links'>
+            <a href='https://github.com/atcoder-for-chinese-developers/'><Icon name='github'/></a>
+            {
+              links.map((link) => <a href={link.link} key={link.key} title={link.title}>
+                <i className="icon" style={{backgroundImage: `url(${link.icon})`, backgroundSize: 'cover'}}/>
+              </a>)
+            }
           </div>
         </Container>
       </Segment>

@@ -1,42 +1,37 @@
-import { useParams } from 'react-router-dom';
-import './Home.css';
+import { Link, useRouteLoaderData } from "react-router-dom";
+import Nav from "../components/Nav";
+import { Container, Header, Image, List } from "semantic-ui-react";
+import "./Home.css"
+import { formatDate } from "../js/formatDate";
 
-import ContestList from '../components/ContestList';
-
-import { Container } from 'semantic-ui-react';
-import { useEffect } from 'react';
-import { useGA } from '../js/useGA';
-
-interface HomeProps {
-  data: GlobalData,
-  setActiveNavItem: React.Dispatch<React.SetStateAction<string | null>>
+export default function Home() {
+    const {siteInfos} = useRouteLoaderData('home') as {siteInfos: SiteInfoSet};
+    let siteList = [] as {key: string, icon: string, title: string, lastCommit: CommitInfo}[];
+    for (const id in siteInfos) {
+        const site = siteInfos[id];
+        siteList.push({key: id, icon: site.icon, title: site.title, lastCommit: site.lastCommit});
+    }
+    return (
+        <>
+            <Nav navItems={[]} />
+            <Container className="home-container">
+                <Header as={'h1'}>OJ 列表</Header>
+                <List divided relaxed>
+                    {
+                        siteList.map((site) =>
+                            <List.Item key={site.key}>
+                                <Image avatar src={site.icon}/>
+                                <List.Content>
+                                    <List.Header as={Link} to={`/${site.key}`}>{site.title}</List.Header>
+                                    <List.Description>
+                                        最后更新于 {formatDate(site.lastCommit.date)} <a href={`//github.com/atcoder-for-chinese-developers/articles/commit/${site.lastCommit.id}`}><code>{site.lastCommit.short}</code></a>
+                                    </List.Description>
+                                </List.Content>
+                            </List.Item>
+                        )
+                    }
+                </List>
+            </Container>
+        </>
+    );
 }
-
-function Home(props: HomeProps) {
-  const params = useParams();
-  useGA();
-
-  const tab = params.hasOwnProperty('tab') ? (params.tab as string) : 'abc';
-
-  useEffect(() => {
-    let tab = params.hasOwnProperty('tab') ? params.tab : 'abc';
-    let title = '';
-    if (tab === 'abc') title = 'AtCoder Beginner Contest';
-    else if (tab === 'arc') title = 'AtCoder Regular Contest';
-    else if (tab === 'agc') title = 'AtCoder Grand Contest';
-    else if (tab === 'ahc') title = 'AtCoder Heuristic Contest';
-    else title = '其它比赛';
-    document.title = `${ title } - AtCoder for Chinese`;
-    props.setActiveNavItem(tab || null);
-  });
-
-  return (
-    <div className="Home">
-      <Container>
-        <ContestList data={ props.data.contests[tab] || {} }></ContestList>
-      </Container>
-    </div>
-  );
-}
-
-export default Home;
