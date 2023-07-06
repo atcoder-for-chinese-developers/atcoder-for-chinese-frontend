@@ -3,10 +3,17 @@ import { Container, Icon, Segment } from "semantic-ui-react";
 import './Footer.css';
 
 interface FooterProps {
-  lastCommit: CommitInfo
+  lastCommit: CommitInfo,
+  siteInfos: SiteInfoSet
 };
 
 function Footer(props: FooterProps) {
+  let links = [] as {link: string, icon: string, key: string, title: string}[];
+  for (const id in props.siteInfos) {
+    const site = props.siteInfos[id];
+    links.push({link: site.link, icon: site.icon, title: site.title, key: id});
+  }
+  console.log(links);
   return (
     <>
       <Segment vertical className='footer'>
@@ -22,7 +29,12 @@ function Footer(props: FooterProps) {
             </span>
           </div>
           <div className='icon-links'>
-            <a href='//github.com/atcoder-for-chinese-developers/'><Icon name='github'/></a>
+            <a href='https://github.com/atcoder-for-chinese-developers/'><Icon name='github'/></a>
+            {
+              links.map((link) => <a href={link.link} key={link.key} title={link.title}>
+                <i className="icon" style={{backgroundImage: `url(${link.icon})`, backgroundSize: 'cover'}}/>
+              </a>)
+            }
           </div>
         </Container>
       </Segment>

@@ -13,5 +13,11 @@ type NavItem = {
 }
 
 type SiteInfo = {
-  [site: string]: any
+  title: string,
+  icon: string,
+  link: string,
+  lastCommit: CommitInfo
+}
+type SiteInfoSet = {
+  [site: string]: SiteInfo
 };

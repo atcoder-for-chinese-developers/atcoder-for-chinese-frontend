@@ -1,9 +1,27 @@
+import { Outlet, useLoaderData } from "react-router-dom";
 import { fetchObject } from "../js/utils";
+import Footer from "../components/Footer";
 
 export async function loader() {
-    let siteList = await fetchObject(`${process.env.REACT_APP_ARTICLES_PATH}/list.json`) as string[];
+    let siteList = await fetchObject(`${process.env.REACT_APP_ARTICLES_PATH}/list.json`) as {[id: string]: CommitInfo};
+    let nativeSiteInfo = await fetchObject(`${process.env.REACT_APP_SPIDERS_PATH}/list.json`) as SiteInfoSet;
     let lastCommit = await fetchObject(`${process.env.REACT_APP_ARTICLES_PATH}/commitInfo.json`) as CommitInfo;
-    let siteInfo = {} as SiteInfo;
-    for (let site of siteList) siteInfo[site] = 1;
-    return { siteInfo, lastCommit };
+    let siteInfos = {} as SiteInfoSet;
+    for (const site in siteList) {
+        if (nativeSiteInfo[site]) {
+            siteInfos[site] = nativeSiteInfo[site];
+            siteInfos[site].lastCommit = siteList[site];
+        }
+    }
+    return { siteInfos, lastCommit };
+}
+
+export default function HomeRoute() {
+    const {lastCommit, siteInfos} = useLoaderData() as {lastCommit: CommitInfo, siteInfos: SiteInfoSet};
+    return (
+        <>
+            <Outlet />
+            <Footer lastCommit={lastCommit} siteInfos={siteInfos}/>
+        </>
+    )
 }

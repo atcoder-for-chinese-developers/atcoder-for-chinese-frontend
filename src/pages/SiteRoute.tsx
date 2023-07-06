@@ -1,7 +1,6 @@
-import { Outlet, useLoaderData, useParams, useRouteLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData, useParams } from "react-router-dom";
 import { fetchObject } from "../js/utils";
 import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 
 export async function loader({ params }: any) {
     let site = params.site as string;
@@ -11,7 +10,6 @@ export async function loader({ params }: any) {
 }
 
 export default function SiteRoute() {
-    const {lastCommit} = useRouteLoaderData('home') as {lastCommit: CommitInfo};
     const { siteData } = useLoaderData() as { siteData: SiteData };
     const { site } = useParams() as { site: string };
 
@@ -38,6 +36,5 @@ export default function SiteRoute() {
     return (<>
         <Nav navItems={navItems} />
         <Outlet />
-        <Footer lastCommit={lastCommit} />
     </>)
 }

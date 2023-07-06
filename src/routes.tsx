@@ -2,7 +2,7 @@ import { RouteObject } from "react-router-dom";
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import SiteRoute, { loader as siteLoader } from "./pages/SiteRoute";
-import { loader as homeLoader } from "./pages/HomeRoute";
+import HomeRoute, { loader as homeLoader } from "./pages/HomeRoute";
 import { loader as articleLoader } from "./pages/ArticleRoute";
 import ProblemRoute, { loader as problemLoader } from "./pages/ProblemRoute";
 import SitePage from "./pages/SitePage";
@@ -15,6 +15,7 @@ export const routes = [
         errorElement: <ErrorPage />,
         loader: homeLoader,
         id: 'home',
+        element: <HomeRoute />,
         children: [
             {
                 index: true,
