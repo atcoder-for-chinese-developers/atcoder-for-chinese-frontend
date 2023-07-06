@@ -13,7 +13,6 @@ function Footer(props: FooterProps) {
     const site = props.siteInfos[id];
     links.push({link: site.link, icon: site.icon, title: site.title, key: id});
   }
-  console.log(links);
   return (
     <>
       <Segment vertical className='footer'>
