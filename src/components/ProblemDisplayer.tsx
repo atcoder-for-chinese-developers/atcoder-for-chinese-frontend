@@ -77,7 +77,7 @@ function ProblemDisplayer(props: ProblemDisplayerProps) {
         className={ props.large ? 'LargeDifficultyDisplayer' : (props.small ? 'SmallDifficultyDisplayer' : 'DifficultyDisplayer') }
         style={ getDifficultyDisplayerStyle(problem.difficulty) }
       />
-      <span title={ problem.difficulty !== null ? '(*' + problem.difficulty + ') ' + problem.title : problem.title }>{ getTextElement(problem.title) }</span>
+      <span title={ problem.difficulty !== null ? '(*' + problem.difficulty.value + ') ' + problem.title : problem.title }>{ getTextElement(`${problem.index}. ${problem.title}`) }</span>
     </span>
   );
 }
