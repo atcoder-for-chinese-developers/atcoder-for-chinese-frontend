@@ -25,7 +25,6 @@ function ContestList(props: ContestListProps) {
       for (const contestProblem of problems) {
         const problemID = contestProblem.id;
         const problem = props.problemSet[problemID];
-        const problemPath = `${contestID}/${problemID}`;
         problemElements.push(
           <Table.Cell key={ problemID } className='ProblemCell'>
             <ProblemDisplayer problem={problem} link={`/${props.site}/p/${problemID}`} index={contestProblem.index}/>
