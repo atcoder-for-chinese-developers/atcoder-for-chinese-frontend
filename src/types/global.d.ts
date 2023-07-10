@@ -12,12 +12,6 @@ type NavItem = {
   navLink: boolean
 }
 
-type SiteInfo = {
-  title: string,
-  icon: string,
-  link: string,
-  lastCommit: CommitInfo
-}
-type SiteInfoSet = {
-  [site: string]: SiteInfo
+type Dict<T> = {
+  [id: string]: T
 };

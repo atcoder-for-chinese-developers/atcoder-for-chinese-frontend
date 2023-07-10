@@ -2,7 +2,7 @@ import { Outlet, useLoaderData } from "react-router-dom";
 import { fetchObject } from "../js/utils";
 import Footer from "../components/Footer";
 
-export async function loader() {
+export async function loader(): Promise<HomeRouteData> {
     let siteList = await fetchObject(`${process.env.REACT_APP_ARTICLES_PATH}/list.json`) as {[id: string]: CommitInfo};
     let nativeSiteInfo = await fetchObject(`${process.env.REACT_APP_SPIDERS_PATH}/list.json`) as SiteInfoSet;
     let lastCommit = await fetchObject(`${process.env.REACT_APP_ARTICLES_PATH}/commitInfo.json`) as CommitInfo;
@@ -17,7 +17,7 @@ export async function loader() {
 }
 
 export default function HomeRoute() {
-    const {lastCommit, siteInfos} = useLoaderData() as {lastCommit: CommitInfo, siteInfos: SiteInfoSet};
+    const {lastCommit, siteInfos} = useLoaderData() as HomeRouteData;
     return (
         <>
             <Outlet />

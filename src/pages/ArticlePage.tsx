@@ -4,17 +4,21 @@ import './ArticlePage.css';
 
 function ArticlePage() {
   const params = useParams() as {[id: string]: string};
-  const {siteData, problemStats} = useRouteLoaderData('site') as {siteData: SiteData, problemStats: ProblemStatSet};
-  const {article} = useRouteLoaderData('article') as {article: ArticleData};
+  const {problemSet} = useRouteLoaderData('site') as SiteRouteData;
+  const {title, tags, author, created, lastCommit, rendered} = useRouteLoaderData('article') as ArticleRouterData;
   
-  const problem = siteData.contests[params.contest].problems[params.problem];
+  const problem = problemSet[params.problem];
 
   return (
     <div className='ArticlePage'>
       <Article
-        article={ article }
+        title={title}
+        tags={tags || []}
+        author={author}
+        created={created}
+        lastCommit={lastCommit}
+        rendered={rendered}
         problem={ problem }
-        stats={problemStats[`${params.contest}/${params.problem}`]  || [0, 0]}
       />
     </div>
   )

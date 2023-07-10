@@ -4,20 +4,20 @@ import ContestList from "../components/ContestList";
 import "./SitePage.css"
 
 export default function SitePage() {
-    const {siteData, problemStats} = useRouteLoaderData('site') as {siteData: SiteData, problemStats: ProblemStatSet};
+    const {contests, contestSet, categorySet, problemSet} = useRouteLoaderData('site') as SiteRouteData;
     const {category, site} = useParams() as {category: string | undefined, site: string};
 
-    let showedContests = {} as ContestSet;
-    if (!category) showedContests = siteData.contests;
+    let showedContests = [] as Contest[];
+    if (!category) showedContests = contests;
     else {
-        if (!siteData.categories[category]) throw new Response('', { status: 404, statusText: 'Not Found' });
-        for (const id of siteData.categories[category].contests) showedContests[id] = siteData.contests[id];
+        if (!categorySet[category]) throw new Response('', { status: 404, statusText: 'Not Found' });
+        for (const id of categorySet[category].contests) showedContests.push(contestSet[id]);
     }
 
     return (
         <>
             <Container className="contestlist-container">
-                <ContestList data={showedContests} problemStats={problemStats} site={site}/>
+                <ContestList data={showedContests} site={site} problemSet={problemSet}/>
             </Container>
         </>
     );

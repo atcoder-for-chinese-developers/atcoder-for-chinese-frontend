@@ -1,10 +1,10 @@
 import { RouteObject } from "react-router-dom";
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
-import SiteRoute, { loader as siteLoader } from "./pages/SiteRoute";
-import HomeRoute, { loader as homeLoader } from "./pages/HomeRoute";
-import { loader as articleLoader } from "./pages/ArticleRoute";
-import ProblemRoute, { loader as problemLoader } from "./pages/ProblemRoute";
+import SiteRoute, { loader as siteLoader } from "./routes/SiteRoute";
+import HomeRoute, { loader as homeLoader } from "./routes/HomeRoute";
+import { loader as articleLoader } from "./routes/ArticleRoute";
+import ProblemRoute, { loader as problemLoader } from "./routes/ProblemRoute";
 import SitePage from "./pages/SitePage";
 import ProblemPage from "./pages/ProblemPage";
 import ArticlePage from "./pages/ArticlePage";
@@ -32,11 +32,11 @@ export const routes = [
                         element: <SitePage />
                     },
                     {
-                        path: '/:site/:category',
+                        path: '/:site/c/:category',
                         element: <SitePage />
                     },
                     {
-                        path: '/:site/:contest/:problem',
+                        path: '/:site/p/:problem',
                         loader: problemLoader,
                         id: 'problem',
                         element: <ProblemRoute />,
@@ -46,7 +46,7 @@ export const routes = [
                                 element: <ProblemPage />
                             },
                             {
-                                path: '/:site/:contest/:problem/:type/:id',
+                                path: '/:site/p/:problem/:type/:id',
                                 loader: articleLoader,
                                 id: 'article',
                                 children: [

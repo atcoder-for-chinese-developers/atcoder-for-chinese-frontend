@@ -8,7 +8,7 @@ interface ProblemDisplayerProps {
   problem: Problem;
   large?: boolean;
   small?: boolean;
-  stats: ProblemStat;
+  index: string;
 };
 
 function ProblemDisplayer(props: ProblemDisplayerProps) {
@@ -47,8 +47,8 @@ function ProblemDisplayer(props: ProblemDisplayerProps) {
     );
   }
 
-  const translationNumber = props.stats[0];
-  const solutionNumber = props.stats[1];
+  const translationNumber = props.problem.stats[0];
+  const solutionNumber = props.problem.stats[1];
 
   return (
     <span>
@@ -77,7 +77,7 @@ function ProblemDisplayer(props: ProblemDisplayerProps) {
         className={ props.large ? 'LargeDifficultyDisplayer' : (props.small ? 'SmallDifficultyDisplayer' : 'DifficultyDisplayer') }
         style={ getDifficultyDisplayerStyle(problem.difficulty) }
       />
-      <span title={ problem.difficulty !== null ? '(*' + problem.difficulty.value + ') ' + problem.title : problem.title }>{ getTextElement(`${problem.index}. ${problem.title}`) }</span>
+      <span title={ problem.difficulty !== null ? '(*' + problem.difficulty.value + ') ' + problem.title : problem.title }>{ getTextElement(`${props.index}. ${problem.title}`) }</span>
     </span>
   );
 }

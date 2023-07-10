@@ -5,8 +5,8 @@ import ProblemDisplayer from './ProblemDisplayer';
 import { useEffect, useState } from 'react';
 
 interface ContestListProps {
-  data: ContestSet;
-  problemStats: ProblemStatSet;
+  data: Contest[];
+  problemSet: Dict<Problem>;
   site: string;
 };
 
@@ -22,12 +22,13 @@ function ContestList(props: ContestListProps) {
       const contest = contestList[contestID];
       let problems = contest.problems;
       let problemElements = [];
-      for (const problemID in problems) {
-        const problem = problems[problemID];
+      for (const contestProblem of problems) {
+        const problemID = contestProblem.id;
+        const problem = props.problemSet[problemID];
         const problemPath = `${contestID}/${problemID}`;
         problemElements.push(
           <Table.Cell key={ problemID } className='ProblemCell'>
-            <ProblemDisplayer problem={ problem } stats={props.problemStats[problemPath] || [0, 0]} link={ '/' + props.site + '/' + contestID + '/' + problemID }/>
+            <ProblemDisplayer problem={problem} link={`/${props.site}/p/${problemID}`} index={contestProblem.index}/>
           </Table.Cell>
         )
       }
